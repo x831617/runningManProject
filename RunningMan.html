@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<meta property="og:url" content="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="小詠的Running Man" />
+<meta property="og:description" content="Running Man介紹(jQuery Mobile)" />
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/actor2.jpg" />-->
+<link rel="stylesheet" href="css/themes/r.css" />
+<link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+<link rel="stylesheet" href="jquery.mobile-1.4.5.min.css">
+
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery.mobile-1.4.5.min.js"></script>
+<style>
+/* Show priority 1 at 320px (20em x 16px) */
+@media screen and (min-width: 10em) {
+   #popMenu th.ui-table-priority-1,
+   #popMenu td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 20em) {
+   #popMenu  th.ui-table-priority-2,
+   #popMenu td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 30em) {
+   #popMenu  th.ui-table-priority-3,
+   #popMenu td.ui-table-priority-3 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 40em) {
+   #popMenu  th.ui-table-priority-4,
+   #popMenu td.ui-table-priority-4 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 50em) {
+   #popMenu  th.ui-table-priority-5,
+   #popMenu td.ui-table-priority-5 {
+     display: table-cell;
+   }
+}
+@media screen and (min-width: 60em) {
+   #popMenu  th.ui-table-priority-6,
+   #popMenu td.ui-table-priority-6 {
+     display: table-cell;
+   }
+}
+#popMenu th.ui-table-cell-hidden,
+#popMenu td.ui-table-cell-hidden {
+  display: none;
+}
+ 
+/* Manually shown */
+#popMenu th.ui-table-cell-visible,
+#popMenu td.ui-table-cell-visible {
+   display: table-cell;
+}
+.panel-content {
+    padding: 1em;
+  }
+</style>
+
+
+<!--
+<link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+<script src="jquery-1.11.1.min.js"></script>
+<script src="jquery.mobile-1.4.5.min.js"></script>
+-->
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		//localStorage.clear();
+		$('body').bind('taphold',function(event)
+			{
+				alert('不需一直按住...');
+				event.stopPropagation();
+				return false;
+			});
+		$('body').bind('swipe',function()
+			{
+				alert("滑鼠慢慢動...");
+				event.stopPropagation();
+				return false;
+			});
+
+		
+	});
+	//記事本功能, 讀取localstorage的紀錄, 並且列出來
+	$(document).on("pagecreate", "#index_index", function() 
+	{
+		var $listview = $(this).find('ul[data-role="listview"]');
+		var $strHTML = "";
+		var $sum = localStorage.length;
+		$strHTML += '<li data-role=\"list-divider\">全部記事本内容<span class=\"ui-li-count\">' + $sum + '</span></li>';
+		for(var INT = 0 ; INT<localStorage.length; INT++)
+		{
+			var keyName = localStorage.key(INT);
+
+			var valName = localStorage.getItem(keyName);
+			$strHTML += '<li>標題 : ' + keyName + '  內容 : '+ valName +'<input type="submit" id="deleteTrigger" " value="刪除" align="right" onclick="deleteRecord('+'\''+keyName+'\''+');"/></li>';
+			$strHTML += '<hr></hr>';
+		}
+		$listview.html($strHTML);
+	});
+	//新增記事...
+	function save()
+	{
+		//使用 DOM 來取得參數
+		var titleString = String(document.getElementById('txt-title').value);
+		var contentString = String(document.getElementById('txta-content').value);
+		//存入 local storage
+		//document.write(titleString);
+		//document.write(contentString);
+		//localStorage.setItem("lastname", "Smith");
+		localStorage.setItem(titleString,contentString);
+		location.reload();
+		window.location = "#page1";
+	}
+	//刪除記事...
+	
+	function deleteRecord(passValue)
+	{
+		//var a = passValue;
+		//console.log(a);
+		//var $newOne = $(this).find('li[data-role="list-divider"]');
+		//$newOne.html("trigger!!");
+		//var temp=String(document.getElementById('hidden').value);
+		localStorage.removeItem(passValue);
+		location.reload();
+		window.location = "#page1";
+	}
+	$("a").loader(
+		{
+			text: "Loading...";
+			textVisible: true;
+			defaults: true;
+		});
+	
+</script>
+</head>
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '191754544283675',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  //(function(d, s, id){
+    // var js, fjs = d.getElementsByTagName(s)[0];
+     //if (d.getElementById(id)) {return;}
+     //js = d.createElement(s); js.id = id;
+     //js.src = "//connect.facebook.net/en_US/sdk.js";
+     //fjs.parentNode.insertBefore(js, fjs);
+   //}(document, 'script', 'facebook-jssdk'));
+</script>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div data-role="page" id="page1">
+	<div data-role="header" data-theme="b" data-fullscreen="true" data-position="fixed">
+		<h3>韓國綜藝Running Man介紹</h3>
+		<a href="#" class="ui-btn-right" onClick="history.back()">回上一頁</a>
+		<a href="#page1" class="ui-btn-left">首頁</a>
+	</div>
+	<div data-role="content">
+		<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b">
+			<li data-role="list-divider"><h3>最新消息</h3></li>
+			<li><marquee onMouseOver="this.stop()" onMouseOut="this.start()">Running Man目前播放集數為244。</marquee></li>
+			<li><center><div class="fb-page" data-href="https://www.facebook.com/RunningManTW" data-width="800" data-height="600" data-hide-cover="true" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/RunningManTW"><a href="https://www.facebook.com/RunningManTW">Running Man 런닝맨 台灣總站</a></blockquote></div></div></center></li>
+
+		</ul>
+		<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div><br/>
+		<center><div align="center" class="fb-comments" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="480" data-numposts="5" data-colorscheme="light"></div></center>
+		<!--<div class="fb-share-button" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-layout="button_count"></div>-->
+		<!-- "折疊式內容"
+		<div data-role="collapsible" data-collapsed="true">
+		<h3>此為第一個開發的App，功能如下</h3>
+		<p>統整我的最愛</p>
+		<p>簡易記事功能</p>
+		<p>時間紀錄表</p>
+		<p><a href="#page2">關於亞東資管數位內容設計與創新</a></p>
+		</div>
+		-->
+	</div>
+	<div data-role="footer" data-theme="b" data-fullscreen="true" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page1" data-icon="home" data-iconpos="top" >最新消息</a></li>
+				<li><a href="#page2" data-icon="star" data-iconpos="top" >Running Man主軸與成員介紹</a></li>
+				<li><a href="#page3" data-icon="star" data-iconpos="top" >推薦的集數</a></li>
+				<li><a href="#page4" data-icon="grid" data-iconpos="top" >Running Man集數清單</a></li>
+				<li><a href="#page5" data-icon="gear" data-iconpos="top" >設定</a></li>
+			</ul>
+			<br/>
+			<p align="center">資料來源:http://zh.wikipedia.org/wiki/Running_Man</p>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="page2">
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h3>Running Man主軸與成員介紹</h3>
+		<a href="#" class="ui-btn-right" onClick="history.back()">回上一頁</a>
+		<a href="#page1" class="ui-btn-left">首頁</a>
+	</div>
+	<div data-role="content">
+		
+  			<div data-role="collapsible" data-collapsed="false">
+    		<h3>Running Man主軸</h3>
+    		<p>
+    		Running Man從2010在韓國開播，初期主持人包括池錫辰、金鍾國、Gary、Haha、宋仲基和李光洙等人，以及宋智孝、Lizzy後來加入成為主持，但宋仲基和Lizzy中途退出。
+    		</p>
+			<p>
+			初期的遊戲設定是嘉賓與主持們被鎖於韓國著名地標進行遊戲，並需於其開始營業前逃出，經過幾輪遊戲後，最後輸掉的成員會被安排在人來人往的地點中接受尷尬的懲罰。2011年5月以後取消給予遊戲輸者的懲罰，不定期給予勝者獎品，並且遊戲方式更改為先前往各地方進行任務，由勝出的成員或隊伍獲得對最終任務有利之提示或權力。而遊戲中最精彩的部份就屬緊張刺激的撕名牌戰。
+			</p>
+  			</div>
+  			<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+  			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="c">
+				<li data-role="list-divider"><h3>成員介紹</h3></li>
+				<div data-role="collapsible-set">
+				<li>
+					<div data-role="collapsible">
+    				<h3>劉在石</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor1.jpg" alt="劉在石" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>
+    								
+    								劉在錫是韓國超高人氣的一位主持人、笑星及演員，別稱「國民MC」，分別於韓國三大地面電視台主持不少綜藝節目，其中包括非常受歡迎的《無限挑戰》、《家族的誕生》及《Running Man》等。初出道主持節目時常帶著蚱蜢頭套，因而有「蚱蜢」之名。</center></p><br/>
+    								<a href="#defaultpanel1" data-role="button" data-inline="true" data-icon="bars">入行經過</a><br/>
+    								<a href="#defaultpanel2" data-role="button" data-inline="true" data-icon="bars">家庭</a><br/>
+    								<a href="#defaultpanel3" data-role="button" data-inline="true" data-icon="bars">主持風格</a><br/>
+    								<a href="#defaultpanel4" data-role="button" data-inline="true" data-icon="bars">節目中的角色</a>
+    							</td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>李光洙</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor2.jpg" alt="李光洙" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>曾是模特兒，於2008年以《KTF Show－二十歲篇》廣告出道；2009年拍攝MBC日日劇《穿透屋頂的High Kick》後開始為人熟悉；2010年開始出演SBS綜藝節目《Running Man》後晉身為綜藝新星，因在節目海外取景時取得壓倒性人氣被隊友封為「亞洲王子」，於電影界亦成為崛起的新勢力。</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>金鐘國</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor3.jpg" alt="金鐘國" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>韓國歌手兼藝人，曾屬於二人男子組合Turbo，直到2000年Mikey當兵，金鐘國正式獨立發展，2001推出首張個人專輯。金鐘國於2005年憑《討人喜歡》一曲風靡全韓國，並於同年橫掃三大地面電視台的音樂大獎，成為韓國樂壇近二十年來唯一一位三冠個人得主。目前是韓國當紅綜藝節目《星期天真好－Running Man》的固定成員之一</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>Gary</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor4.jpg" alt="Gary" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>是韓國男子二人饒舌組合Leessang及SBS綜藝節目《Running Man》成員之一。</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>HaHa</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor5.jpg" alt="HaHa" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>韓國雷鬼歌手、演員及主持人，現多半以節目主持身份活躍於演藝界。為SBS綜藝節目《Running Man》成員之一。</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>池石鎮</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actor6.jpg" alt="池石鎮" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>韓國節目主持人，現為SBS綜藝節目《星期天真好－Running Man》的固定成員之一。</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				<li>
+					<div data-role="collapsible">
+    				<h3>宋智孝</h3>
+    					<table border="1" style="width:100%; table-layout: fixed;">
+    						<tr>
+    							<td><center><img src="actress1.jpg" alt="宋智孝" style="width:400px; height:380px"></center></td>
+    							<td style="width:50%; word-wrap: break-word; word-break: normal;"><p><center>2000年拍攝保寧製藥的電視廣告出道，2003年開始影視作品的拍攝，一直以玉女形象示人，先後在《宮》化身皇太子的初戀情人、《朱蒙》裡飾演高句麗皇后禮氏夫人，《霜花店》她又是演王后，宛如「皇后專業戶」，其敬業的表現在韓國獲得一片好評。而宋智孝在韓國綜藝節目《Running Man》裡的表現一改她往日在戲劇中所扮演的角色所帶給觀眾的印象，她在節目中表現率真、大方，並且不因為顧忌自己的形象而了事，而是在遊戲中十分努力地去做好自己的任務，甚至不介意素顏上鏡。2013年獲得《第七屆SBS演藝大賞》女子最優秀賞。韓國十大「自然系美女」榮登第一名寶座。</center></p></td>	
+    						</tr>
+    					</table>
+  					</div>
+  				</li>
+  				</div>
+			</ul>
+
+	</div>
+	<div data-role="footer" data-theme="b" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page1" data-icon="home" data-iconpos="top">最新消息</a></li>
+				<li><a href="#page2" data-icon="star" data-iconpos="top">Running Man主軸與成員介紹</a></li>
+				<li><a href="#page3" data-icon="star" data-iconpos="top">推薦的集數</a></li>
+				<li><a href="#page4" data-icon="grid" data-iconpos="top">Running Man集數清單</a></li>
+				<li><a href="#page5" data-icon="gear" data-iconpos="top">設定</a></li>
+			</ul>
+			<br/>
+			<p align="center">資料來源:http://zh.wikipedia.org/wiki/Running_Man</p>
+		</div>
+	</div>
+	<div data-role="panel" id="defaultpanel1" data-theme="b" data-position="right" data-display="overlay">
+    	<div class="panel-content">
+      		<h3>入行經過</h3>
+	      		<p>劉在錫畢業於龍文高中，大學時期於首爾藝術大學廣播演藝系就讀，但最終因演藝活動繁忙而中途退學。大學一年級的他因為參加1991年5月5日舉行的《第1屆KBS大學喜劇節》成為KBS第7期笑星而入行。在那以後，他的表現沒有獲得太大的反響，度過了十年默默無聞的生活。他經常戴著蚱蜢頭套、跳著蚱蜢舞，客串一些節目的邊緣角色。因為他沒有很高的人氣，也沒有獨特的外形，只能做一個無名小輩。</p>
+
+				<p>1998年，由於參加徐世原的脫口秀節目《Talk Box》，他開始找到了自己存在的價值。靠著當時的知名度，劉在錫於2001年獨自主持MBC的《目標達成星期六－同居同落》，這是最初一檔藝人真實綜藝節目。從此以後，劉在錫開始慢慢展露他的光芒。</p>
+      		<a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">關閉視窗</a>
+    	</div><!-- /content wrapper for padding -->
+  	</div><!-- /defaultpanel -->
+  	<div data-role="panel" id="defaultpanel2" data-theme="b" data-position="right" data-display="overlay">
+    	<div class="panel-content">
+      		<h3>公開戀情與組織家庭</h3>
+	      		<p>劉在錫於2008年6月4日公開結婚消息。兩人的婚禮於2008年7月6日在韓國首爾獎忠洞新羅酒店舉行，藝人李輝宰擔任司儀，議員邊雄田擔任證婚人。</p>
+      		<a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">關閉視窗</a>
+    	</div><!-- /content wrapper for padding -->
+  	</div><!-- /defaultpanel -->
+  	<div data-role="panel" id="defaultpanel3" data-theme="b" data-position="right" data-display="overlay">
+    	<div class="panel-content">
+      		<h3>主持風格</h3>
+	      		<p>實際上，劉在錫不是掌握各種才能的搞笑藝人。曾經因為沒有領導能力也經歷了很多艱辛。但現在，正是因為「缺少領導能力」這一點變成了他的優勢。最近流行的娛樂節目大都是訪談、舞蹈及遊戲相結合的綜合性娛樂節目，這種節目需要的不是在前面搖旗吶喊的主導型主持人，而是在一旁協助可以讓每位來賓都能發揮自己實力的團結性主持人。劉在錫在這一點上相當擅長。據各節目攝製組稱，他的優點是，只要感覺到氣氛冷清，就是獻出自己也要拯救節目。</p>
+      		<a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">關閉視窗</a>
+    	</div><!-- /content wrapper for padding -->
+  	</div><!-- /defaultpanel -->
+  	<div data-role="panel" id="defaultpanel4" data-theme="b" data-position="right" data-display="overlay">
+    	<div class="panel-content">
+      		<h3>節目中的角色</h3>
+	      		<p>在最高收視綜藝節目《無限挑戰》中，他的角色是作為隊中的班長及隊長，在主持節目之餘亦要帶領包括朴明洙、鄭亨敦、鄭埻夏、Haha等成員去接受不同的挑戰。</p>
+
+<p>在《家族的誕生》中，擔任主MC的他與BIGBANG的大聲兩人因傻頭傻腦的合拍性格，被稱為「阿呆阿瓜兄弟」，亦與李孝利組成國民兄妹。而《家族的誕生》自播出以來，一直保持相當高的收視。</p>
+
+<p>而在《Running Man》中，他作為主MC，人稱劉魯斯·威利斯、劉赫。節目中與宋智孝被稱為「糖果聯盟」，與李光洙被稱為「劉李組合」，與池錫辰被稱為「錫兄弟」，和金鐘國是節目中的「兩大山脈」。</p>
+      		<a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">關閉視窗</a>
+    	</div><!-- /content wrapper for padding -->
+  	</div><!-- /defaultpanel -->
+</div>
+
+<div data-role="page" id="page3">
+	<div data-role="header" data-theme="b">
+		<h3>推薦的集數</h3>
+		<a href="#" class="ui-btn-right" onClick="history.back()">回上一頁</a>
+		<a href="#page1" class="ui-btn-left">首頁</a>
+	</div>
+	<div data-role="content">
+		<div data-role="tabs">
+	      <div data-role="navbar">
+	        <ul>
+	          <li><a href="#fragment-1" class="ui-btn-active">超爆笑類別</a></li>
+	          <li><a href="#fragment-2">全明星賽</a></li>
+	          <li><a href="#fragment-3">絕對要看的集數</a></li>
+	        </ul>
+	      </div>
+	      <div id="fragment-1">
+	        <ul data-role="listview" data-inset="true" data-theme="c" data-dividetheme="c">
+				<li data-role="list-divider">超爆笑類別</li>
+				<li>237:庭沼珉、哈妮(EXID)、尹邵熙、南志鉉、Yerin(GFRIEND);最高的愛情</li>
+			</ul>
+			<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	      </div>
+	      <div id="fragment-2">
+	        <ul data-role="listview" data-inset="true" data-theme="c" data-dividetheme="c">
+				<li data-role="list-divider">全明星賽</li>
+				<li>?</li>
+
+			</ul>
+			<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	      </div>
+	      <div id="fragment-3">
+	        <ul data-role="listview" data-inset="true" data-theme="c" data-dividetheme="c">
+				<li data-role="list-divider">絕對要看的集數</li>
+				<li>?</li>
+			</ul>
+			<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	      </div>
+	    </div>
+	</div>
+	<div data-role="footer" data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page1" data-icon="home" data-iconpos="top">最新消息</a></li>
+				<li><a href="#page2" data-icon="star" data-iconpos="top">Running Man主軸與成員介紹</a></li>
+				<li><a href="#page3" data-icon="star" data-iconpos="top">推薦的集數</a></li>
+				<li><a href="#page4" data-icon="grid" data-iconpos="top">Running Man集數清單</a></li>
+				<li><a href="#page5" data-icon="gear" data-iconpos="top">設定</a></li>
+			</ul>
+			<br/>
+			<p align="center">資料來源:http://zh.wikipedia.org/wiki/Running_Man</p>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="page4">
+	<div data-role="header" data-theme="b" data-position="fixed">
+		<h3>集數清單</h3>
+		<a href="#" class="ui-btn-right" onClick="history.back()">回上一頁</a>
+		<a href="#page1" class="ui-btn-left">首頁</a>
+	</div>
+	<div data-role="content">
+		<div data-role="collapsible" data-collapsed="false">
+		<h3>2015年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>244</td>
+					<td>2015/4/26</td>
+					<td>金釉利、張度妍、Jessi(Lucky J)、草娥(AOA)、徐睿知</td>
+					<td>M Palace Wedding</td>
+					<td>"危險的情侶競賽"危險的情侶:金鍾國、張度妍; 任務隊:劉在錫、Jessi; 池錫辰、金釉利; Gary、徐睿知; 哈哈、草娥; 李光洙、宋智孝</td>
+					<td>危險的情侶:與所有情侶在同一婚禮會場; 任務隊:與危險的情侶在不同婚禮會場</td>
+				</tr>
+				<tr>
+					<td>243</td>
+					<td>2015/4/19</td>
+					<td>張水院、姜均成(Noel)、孫浩俊、柳炳宰、洪宗玄</td>
+					<td>Heyri藝術村</td>
+					<td>"大勢男競賽"
+Hot Guy隊:
+劉在錫、池錫辰、李光洙、姜均成、孫浩俊、柳炳宰;
+Cool Guy隊:
+金鍾國、Gary、哈哈、宋智孝、張水院、洪宗玄; 	
+"最終任務"
+Hot Guy隊:
+姜均成;
+Cool Guy隊:
+哈哈、宋智孝、張水院、洪宗玄;
+蘿蔔塊隊:
+劉在錫、池錫辰、金鍾國、Gary、李光洙、孫浩俊、柳炳宰</td>
+					<td>擊敗其餘的隊伍</td>
+				</tr>
+				<tr>
+					<td>242</td>
+					<td>2015/4/12</td>
+					<td>丁一宇、鄭容和(CNBLUE)、李洪基(FTIsland)</td>
+					<td>SBS炭峴製作中心</td>
+					<td>"環遊世界韓流競賽" 在錫隊:劉在錫、池錫辰、Gary、哈哈、宋智孝、鄭容和、李洪基; 鍾國隊:金鍾國、李光洙、丁一宇</td>
+					<td>在錫隊:尋找「RUNNING MAN」字母卡並貼在判定台上;鍾國隊:擊敗在錫隊</td>
+				</tr>
+				<tr>
+					<td>241</td>
+					<td>2015/4/5</td>
+					<td>朴藝珍、尹珍序、申世景</td>
+					<td>水原棒球場</td>
+					<td>"秘密的同學" 犯人隊:宋智孝、朴藝珍、尹珍序、申世景;任務隊:劉在錫、池錫辰、金鍾國、Gary、哈哈、李光洙</td>
+					<td>犯人隊:隱藏身份並持有隕石;任務隊:舉報持有隕石的犯人</td>
+				</tr>
+				
+				<tr>
+					<td>232</td>
+					<td>2015/2/1</td>
+					<td>吳賢慶、金智秀、金元俊、洪京民、朴智允、申多恩、Miryo</td>
+					<td>國立果川科學館</td>
+					<td>"友情的黃金包競賽" 劉在錫、金元俊; 池錫辰、吳賢慶; 金鍾國、洪京民; Gary、Miryo; 哈哈、朴智允; 宋智孝、金智秀; 李光洙、申多恩</td>
+					<td>限定時間3小時結束時擁有放有黃金鑰匙的黃金包</td>
+				</tr>
+				<tr>
+					<td>229</td>
+					<td>2015/1/11</td>
+					<td>李昇基、文彩元、李瑞鎮</td>
+					<td>韓國漫畫博物館</td>
+					<td>"2 VS 8 欺騙嘉賓任務"「間諜」:李瑞鎮、李昇基; 任務隊:劉在錫、池錫辰、金鍾國、Gary、哈哈、宋智孝、李光洙、文彩元 "伴侶競賽" 1.劉在錫、李瑞鎮; 2.池錫辰、哈哈; 3.金鍾國、李光洙; 4.Gary、宋智孝; 5.李昇基、文彩元</td>
+					<td>最先消除所有卡片</td>
+				</tr>
+				<tr>
+					<td>228</td>
+					<td>2015/1/4</td>
+					<td>李昇基、文彩元、李瑞鎮</td>
+					<td>SBS放送中心</td>
+					<td>今天的天氣 藍隊：劉在錫、李光洙、李昇基; 黃隊：池錫辰、金鍾國、宋智孝; 棕隊：Gary、哈哈、文彩元</td>
+					<td>尋找唯一安全的場所</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		</div>
+		<div data-role="collapsible">
+		<h3>2014年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+			
+		</table>
+		</div>
+		<div data-role="collapsible">
+		<h3>2013年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		
+		</div>
+		<div data-role="collapsible">
+		<h3>2012年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		
+		</div>
+		<div data-role="collapsible">
+		<h3>2011年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		
+		</div>
+		<div data-role="collapsible">
+		<h3>2010年集數清單(Selected Episode)</h3>
+		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
+			<thead>
+				<tr>
+					<th data-priority="1">集數</th>
+					<th data-priority="2">播放日期</th>
+					<th data-priority="3">嘉賓</th>
+					<th data-priority="4">最終地點</th>
+					<th data-priority="5">隊伍</th>
+					<th data-priority="6">勝利條件</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+		</div>
+		<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	</div>
+	<div data-role="footer" data-theme="b" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page1" data-icon="home" data-iconpos="top">最新消息</a></li>
+				<li><a href="#page2" data-icon="star" data-iconpos="top">Running Man主軸與成員介紹</a></li>
+				<li><a href="#page3" data-icon="star" data-iconpos="top">推薦的集數</a></li>
+				<li><a href="#page4" data-icon="grid" data-iconpos="top">Running Man集數清單</a></li>
+				<li><a href="#page5" data-icon="gear" data-iconpos="top">設定</a></li>
+			</ul>
+			<br/>
+			<p align="center">資料來源:http://zh.wikipedia.org/wiki/Running_Man</p>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="page5">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<h3>設定</h3>
+		<a href="#" class="ui-btn-right" onClick="history.back()">回上一頁</a>
+		<a href="#page1" class="ui-btn-left">首頁</a>
+	</div>
+	<div data-role="content">
+		<p>功能仍在構思中...</p>
+		<div class="fb-like" data-href="https://dl.dropboxusercontent.com/u/10539648/www/runningManProject/RunningMan.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	</div>
+	<div data-role="footer" data-position="fixed" data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#page1" data-icon="home" data-iconpos="top">最新消息</a></li>
+				<li><a href="#page2" data-icon="star" data-iconpos="top">Running Man主軸與成員介紹</a></li>
+				<li><a href="#page3" data-icon="star" data-iconpos="top">推薦的集數</a></li>
+				<li><a href="#page4" data-icon="grid" data-iconpos="top">Running Man集數清單</a></li>
+				<li><a href="#page5" data-icon="gear" data-iconpos="top">設定</a></li>
+			</ul>
+			<br/>
+			<p align="center">資料來源:http://zh.wikipedia.org/wiki/Running_Man</p>
+		</div>
+	</div>
+</div>
+
+<!-- 以下是記事本功能，練習localstorage使用 -->
+<div data-role="page" id="index_index">
+	<div data-role="header" data-theme="b">
+		<h3>記事本</h3>
+		<a href="#addnote_index" class="ui-btn-right">新增記事</a>
+	</div>
+	<div data-role="content">
+		<ul data-role="listview"></ul>
+	</div>
+	<div data-role="footer">
+		<p><a href="#page1">回到首頁</a></p>
+	</div>
+</div>
+<!-- 以下是新增page -->
+<div data-role="page" id="addnote_index">
+	<div data-role="header" data-theme="b">
+		<h3>新增記事</h3>
+	</div>
+	<div data-role="content">
+		<label for="txt-title">標題:</label>
+		<input type="text" name="txt-title" id="txt-title" value=""/>
+		<label for="txta-content">內文:</label>
+		<textarea name="txta-content" id="txta-content" value=""></textarea>
+		<input type="submit" value="新增記事" onclick="save();"/>
+	</div>
+	<div data-role="footer">
+		<p><a href="#page1">回到首頁</a></p>
+	</div>
+</div>
+<!--時間紀錄器-->
+<div data-role="page" id="time_index">
+	<div data-role="header" data-theme="b">
+		<h3>日期計算器</h3>
+	</div>
+	<div data-role="content">
+		<label for="time-title">標題:</label>
+		<input type="text" name="txt-title" id="txt-title" value=""/>
+		
+		<input type="submit" value="新增記事" onclick="save();"/>
+	</div>
+	<div data-role="footer">
+		<p><a href="#page1">回到首頁</a></p>
+	</div>
+</div>
+
+</body>
+</html>
