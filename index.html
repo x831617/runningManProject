@@ -342,6 +342,45 @@
     	<div class="panel-content">
       		<h3>入行經過</h3>
 	      		<p>劉在錫畢業於龍文高中，大學時期於首爾藝術大學廣播演藝系就讀，但最終因演藝活動繁忙而中途退學。大學一年級的他因為參加1991年5月5日舉行的《第1屆KBS大學喜劇節》成為KBS第7期笑星而入行。在那以後，他的表現沒有獲得太大的反響，度過了十年默默無聞的生活。他經常戴著蚱蜢頭套、跳著蚱蜢舞，客串一些節目的邊緣角色。因為他沒有很高的人氣，也沒有獨特的外形，只能做一個無名小輩。</p>
+	      		<p>
+
+I have 25 classes and class 0 included all the the negative samples of all 24 other classes so the number of samples in this class is much more bigger than the others (e.g 10 times bigger because it should include all of the negative samples from the 24 other classes)
+
+Now my question is what should I do when I want to train this data set ?
+
+Do I have to use unbalaced training option which libsvm prodives ? -w0 1 -w1 ....
+
+I mean is it obligatory to use this option or not ?
+
+because When I'm training the data without this option it gives 99.8% accuracy for separating classes and when I'm testing this accurate model !!! for some classes I get 100% accuracy and for some other classes I get 0.0% !!!
+
+I mean for some classes it will not miss any sample but for another class it will always return 0 !!! which means it is a negative sample !!!
+
+I want to use this option but I dont know the rules for it. I mean How should I set a value for a class using this option?
+
+Suppose number of samples in each classes are :
+
+class 0 -> 3433
+
+class 1 -> 745
+
+class 2 -> 232
+
+class 3 -> 53
+
+. . . class 23 -> 975
+
+how should I set wi for each class should I scaled them between [0,1] or [-1 1] or (-inf +inf) or what ?
+
+Summary >
+
+1). is it obligatory to use -wi option for my dataset ?
+
+2). how should I set this value
+
+Thanks
+
+	      		</p>
 				<p>1998年，由於參加徐世原的脫口秀節目《Talk Box》，他開始找到了自己存在的價值。靠著當時的知名度，劉在錫於2001年獨自主持MBC的《目標達成星期六－同居同落》，這是最初一檔藝人真實綜藝節目。從此以後，劉在錫開始慢慢展露他的光芒。</p>
       		<a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">關閉視窗</a>
     	</div><!-- /content wrapper for padding -->
