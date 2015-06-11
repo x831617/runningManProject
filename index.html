@@ -77,6 +77,7 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
+		$('#2015list').load('2015list.html');
 		//localStorage.clear();
 		$('body').bind('taphold',function(event)
 			{
@@ -90,8 +91,6 @@
 				event.stopPropagation();
 				return false;
 			});
-
-		
 	});
 	//記事本功能, 讀取localstorage的紀錄, 並且列出來
 	$(document).on("pagecreate", "#index_index", function() 
@@ -478,89 +477,7 @@
 	<div data-role="content">
 		<div data-role="collapsible" data-collapsed="false">
 		<h3>2015年集數清單(Selected Episode)</h3>
-		<table border="1" data-role="table" data-mode="columntoggle" id="popMenu" data-column-btn-text="欄位選項" data-column-popup-theme="b">
-			<thead>
-				<tr>
-					<th data-priority="1">集數</th>
-					<th data-priority="2">播放日期</th>
-					<th data-priority="3">嘉賓</th>
-					<th data-priority="4">最終地點</th>
-					<th data-priority="5">隊伍</th>
-					<th data-priority="6">勝利條件</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>244</td>
-					<td>2015/4/26</td>
-					<td>金釉利、張度妍、Jessi(Lucky J)、草娥(AOA)、徐睿知</td>
-					<td>M Palace Wedding</td>
-					<td>"危險的情侶競賽"危險的情侶:金鍾國、張度妍; 任務隊:劉在錫、Jessi; 池錫辰、金釉利; Gary、徐睿知; 哈哈、草娥; 李光洙、宋智孝</td>
-					<td>危險的情侶:與所有情侶在同一婚禮會場; 任務隊:與危險的情侶在不同婚禮會場</td>
-				</tr>
-				<tr>
-					<td>243</td>
-					<td>2015/4/19</td>
-					<td>張水院、姜均成(Noel)、孫浩俊、柳炳宰、洪宗玄</td>
-					<td>Heyri藝術村</td>
-					<td>"大勢男競賽"
-Hot Guy隊:
-劉在錫、池錫辰、李光洙、姜均成、孫浩俊、柳炳宰;
-Cool Guy隊:
-金鍾國、Gary、哈哈、宋智孝、張水院、洪宗玄; 	
-"最終任務"
-Hot Guy隊:
-姜均成;
-Cool Guy隊:
-哈哈、宋智孝、張水院、洪宗玄;
-蘿蔔塊隊:
-劉在錫、池錫辰、金鍾國、Gary、李光洙、孫浩俊、柳炳宰</td>
-					<td>擊敗其餘的隊伍</td>
-				</tr>
-				<tr>
-					<td>242</td>
-					<td>2015/4/12</td>
-					<td>丁一宇、鄭容和(CNBLUE)、李洪基(FTIsland)</td>
-					<td>SBS炭峴製作中心</td>
-					<td>"環遊世界韓流競賽" 在錫隊:劉在錫、池錫辰、Gary、哈哈、宋智孝、鄭容和、李洪基; 鍾國隊:金鍾國、李光洙、丁一宇</td>
-					<td>在錫隊:尋找「RUNNING MAN」字母卡並貼在判定台上;鍾國隊:擊敗在錫隊</td>
-				</tr>
-				<tr>
-					<td>241</td>
-					<td>2015/4/5</td>
-					<td>朴藝珍、尹珍序、申世景</td>
-					<td>水原棒球場</td>
-					<td>"秘密的同學" 犯人隊:宋智孝、朴藝珍、尹珍序、申世景;任務隊:劉在錫、池錫辰、金鍾國、Gary、哈哈、李光洙</td>
-					<td>犯人隊:隱藏身份並持有隕石;任務隊:舉報持有隕石的犯人</td>
-				</tr>
-				
-				<tr>
-					<td>232</td>
-					<td>2015/2/1</td>
-					<td>吳賢慶、金智秀、金元俊、洪京民、朴智允、申多恩、Miryo</td>
-					<td>國立果川科學館</td>
-					<td>"友情的黃金包競賽" 劉在錫、金元俊; 池錫辰、吳賢慶; 金鍾國、洪京民; Gary、Miryo; 哈哈、朴智允; 宋智孝、金智秀; 李光洙、申多恩</td>
-					<td>限定時間3小時結束時擁有放有黃金鑰匙的黃金包</td>
-				</tr>
-				<tr>
-					<td>229</td>
-					<td>2015/1/11</td>
-					<td>李昇基、文彩元、李瑞鎮</td>
-					<td>韓國漫畫博物館</td>
-					<td>"2 VS 8 欺騙嘉賓任務"「間諜」:李瑞鎮、李昇基; 任務隊:劉在錫、池錫辰、金鍾國、Gary、哈哈、宋智孝、李光洙、文彩元 "伴侶競賽" 1.劉在錫、李瑞鎮; 2.池錫辰、哈哈; 3.金鍾國、李光洙; 4.Gary、宋智孝; 5.李昇基、文彩元</td>
-					<td>最先消除所有卡片</td>
-				</tr>
-				<tr>
-					<td>228</td>
-					<td>2015/1/4</td>
-					<td>李昇基、文彩元、李瑞鎮</td>
-					<td>SBS放送中心</td>
-					<td>今天的天氣 藍隊：劉在錫、李光洙、李昇基; 黃隊：池錫辰、金鍾國、宋智孝; 棕隊：Gary、哈哈、文彩元</td>
-					<td>尋找唯一安全的場所</td>
-				</tr>
-			</tbody>
-		</table>
-		
+		<div id="2015list">	
 		</div>
 		<div data-role="collapsible">
 		<h3>2014年集數清單(Selected Episode)</h3>
@@ -682,7 +599,7 @@ Cool Guy隊:
 	<div data-role="content">
 		<p>功能仍在構思中...</p>
 		<ol>
-			<li>JavaScript讀取別人頁面的部分資訊放到這個網站</li>
+			<li>(2015.06.11 done)JavaScript讀取別人頁面的部分資訊放到這個網站</li>
 		</ol>
 		<div class="fb-like" data-href="https://x831617.github.io/runningManProject/index.html" data-width="450" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 	</div>
